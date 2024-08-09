@@ -3,6 +3,7 @@ version: '3.7'
 services:
   redis:
     image: redis:latest
+    container_name: redis
     ports:
       - 6379
     volumes:
@@ -22,14 +23,14 @@ services:
   app:
     build: ./
     volumes:
-      - ./:/var/www/app
+      - ./:/home/bun/app
     ports:
       - 3000:3000
     environment:
       - NODE_ENV=development
       - PORT=3000
-      - REDIS_URL=redis://cache
-    command: 'bun --watch run index.ts'
+      - REDIS_URL=redis://redis
+    command: 'bun --watch --inspect run index.ts'
     restart: always
     depends_on:
       - redis
@@ -38,7 +39,7 @@ services:
     image: oven/bun:1.1.8-slim
     volumes:
       - .:/home/bun/app
-    command: 'bunx @tailwindcss/cli@next -i static/input.css -o static/main.css --watch'
+    command: 'bunx tailwindcss -i static/input.css -o static/main.css --watch'
     tty: true
 
 volumes:

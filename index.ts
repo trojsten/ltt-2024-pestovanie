@@ -1,14 +1,13 @@
 import { SessionRequest, setSession } from './session'
+import { db } from './util'
 
-console.log('Hello, world!')
+console.log("ahoj")
 
 export const server = Bun.serve({
   fetch: async (Request) => {
     const path = new URL(Request.url).pathname
-    if (
-      Request.method == 'GET' &&
-      (path.startsWith('/static') || path.startsWith('/uploads'))
-    ) {
+    console.log(path)
+    if (Request.method == 'GET' && path.startsWith('/static')) {
       const file = Bun.file('.' + path)
       if (!(await file.exists())) {
         return new Response('Not Found', { status: 404 })
@@ -45,11 +44,12 @@ export const server = Bun.serve({
     const sessReq = new SessionRequest(Request, data, route.params)
 
     const page = await import(route.filePath)
+    console.log(page)
 
     let res: Response | undefined
     if (sessReq.sessionValid == false) {
       if (sessReq.parsedUrl.pathname != '/login') {
-        return setSession(Response.redirect('/login?redirect=' + btoa(Request.url)), undefined)
+        return setSession(Response.redirect('/login?redirect=' + encodeURIComponent(Request.url)), undefined)
       }
     }
 

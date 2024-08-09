@@ -1,8 +1,23 @@
+import { db } from "./util"
+
 interface Session {
   id?: string
+  user: string
 }
 
 const sessionStore = new Map<string, Session>()
+
+export function loadSessions() {
+  db.keys('session:*').then(async (keys) => {
+    console.log(keys)
+    for (const key of keys) {
+      const sess = await db.get(key)
+      if (sess) {
+        sessionStore.set(key.slice(8), JSON.parse(sess))
+      }
+    }
+  })
+}
 
 export class SessionRequest extends Request {
   session?: Session
@@ -30,15 +45,16 @@ export class SessionRequest extends Request {
     this.parsedUrl = new URL(request.url)
   }
 
-  clearSession() {
+  async clearSession() {
     if (this.session && this.session.id) {
       sessionStore.delete(this.session.id)
+      await db.del('session:' + this.session.id)
     }
     this.session = undefined
   }
 }
 
-export function setSession(res: Response, session: Session | undefined): Response {
+export async function setSession(res: Response, session: Session | undefined): Response {
   if (session == undefined) {
     res.headers.append(
       'Set-Cookie',
@@ -51,6 +67,7 @@ export function setSession(res: Response, session: Session | undefined): Respons
     session.id = Math.random().toString(36).slice(2)
   }
   sessionStore.set(session.id, session)
+  await db.set('session:' + session.id, JSON.stringify(session))
 
   res.headers.append('Set-Cookie', `session=${session.id}; Path=/`)
 

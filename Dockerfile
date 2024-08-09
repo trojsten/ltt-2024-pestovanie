@@ -5,4 +5,4 @@ WORKDIR /home/bun/app
 COPY ./ /home/bun/app
 
 RUN bun install
-CMD ["bun", "run", "indedx.ts"]
+CMD ["bun", "run", "index.ts"]
