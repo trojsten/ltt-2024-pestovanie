@@ -34,5 +34,12 @@ services:
     depends_on:
       - redis
 
+  tailwind:
+    image: oven/bun:1.1.8-slim
+    volumes:
+      - .:/home/bun/app
+    command: 'bunx @tailwindcss/cli@next -i static/input.css -o static/main.css --watch'
+    tty: true
+
 volumes:
   redis-data:
