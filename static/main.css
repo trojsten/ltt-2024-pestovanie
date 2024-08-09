@@ -1,0 +1,6 @@
+/*! tailwindcss v4.0.0-alpha.18 | MIT License | https://tailwindcss.com */
+@tailwind base;
+@tailwind components;
+.static {
+  position: static;
+}
