@@ -1,0 +1,38 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - 6379
+    volumes:
+      - redis-data:/data
+
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    environment:
+      - REDIS_HOSTS=local:redis:6379
+      - HTTP_USER=admin
+      - HTTP_PASSWORD=admin
+    ports:
+      - 8081:8081
+    depends_on:
+      - redis
+
+  app:
+    build: ./
+    volumes:
+      - ./:/var/www/app
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - REDIS_URL=redis://cache
+    command: 'bun --watch run index.ts'
+    restart: always
+    depends_on:
+      - redis
+
+volumes:
+  redis-data:
