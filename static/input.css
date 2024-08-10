@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+* {
+    font-family: "Playpen Sans", cursive;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+img {
+    image-rendering: pixelated;
+}
+
+.modal {
+    max-height: calc(100vh - 4rem);
+}

@@ -1,12 +1,8 @@
 import { SessionRequest, setSession } from './session'
-import { db } from './util'
-
-console.log("ahoj")
 
 export const server = Bun.serve({
   fetch: async (Request) => {
     const path = new URL(Request.url).pathname
-    console.log(path)
     if (Request.method == 'GET' && path.startsWith('/static')) {
       const file = Bun.file('.' + path)
       if (!(await file.exists())) {
@@ -44,7 +40,6 @@ export const server = Bun.serve({
     const sessReq = new SessionRequest(Request, data, route.params)
 
     const page = await import(route.filePath)
-    console.log(page)
 
     let res: Response | undefined
     if (sessReq.sessionValid == false) {
