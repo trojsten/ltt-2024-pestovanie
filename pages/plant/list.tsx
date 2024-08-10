@@ -7,7 +7,7 @@ function items() {
     <ul className="flex">
       {allItems.filter(e => e.type == 'plant').map((item) => (
         <li key={item.name}>
-          <img src={item.image} alt={item.name} className="rounded-lg border-4 border-yellow-700 h-14 w-14" />
+          <img src={item.image.length != 0 ? item.image : "/static/sprites/" + item.name + ".png"} alt={item.name} className="rounded-lg border-4 border-yellow-700 h-14 w-14" />
         </li>
       ))}
     </ul>
@@ -17,3 +17,4 @@ function items() {
 export async function get(req: SessionRequest) {
   return renderPage(items())
 }
+
