@@ -28,7 +28,6 @@ export async function renderPage(
 ) {
   let page = content
   if (full) {
-    console.trace('full')
     page = await getWrapper(content)
   }
   const stream = await renderToReadableStream(page)

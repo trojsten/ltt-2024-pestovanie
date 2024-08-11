@@ -20,14 +20,14 @@ function mainPage(data: GameData) {
         <div className="w-1/3 aspect-square">
           <div className="rounded-xl m-4 bg-yellow-900 overflow-hidden shadow-xl flex flex-col justify-between">
             <h3 className="text-lg text-center mb-1">Pole</h3>
-            {itemDisplay(data.planting?.item, data.crafting?.item?.type ?? 'plant')}
+            {itemDisplay(data.planting?.item, data.planting?.item?.type ?? 'plant')}
             <button id="water-btn" className="rounded-b-lg bg-blue-700 p-2 m-3 mt-0 disabled:bg-opacity-50">Poliať</button>
           </div>
         </div>
         <div className="rounded-xl w-1/3 aspect-square">
           <div className="rounded-xl m-4 bg-yellow-900 overflow-hidden shadow-xl flex flex-col justify-between">
             <h3 className="text-lg text-center mb-1">Chov</h3>
-            {itemDisplay(data.breeding?.item, data.crafting?.item?.type ?? 'animal')}
+            {itemDisplay(data.breeding?.item, data.breeding?.item?.type ?? 'animal')}
             <button id="feed-btn" className="rounded-b-lg bg-green-700 p-2 m-3 mt-0 disabled:bg-opacity-50">Nakrmiť</button>
           </div>
         </div>
@@ -35,6 +35,7 @@ function mainPage(data: GameData) {
           <div className="rounded-xl m-4 bg-yellow-900 overflow-hidden shadow-xl flex flex-col justify-between">
             <h3 className="text-lg text-center">Sklad</h3>
             {itemDisplay(data.crafting?.item, data.crafting?.item?.type ?? 'craft')}
+            <button id="make-btn" className="rounded-b-lg bg-gray-700 p-2 m-3 mt-0 disabled:bg-opacity-50">Vyrobiť</button>
           </div>
         </div>
       </section>
@@ -72,25 +73,25 @@ function itemDisplay(item: Item | undefined, type: 'animal' | 'plant' | 'craft')
     'plant': 'Žiadna rastlina',
     'craft': 'Žiadny predmet'
   }
-  const color = item?.final ? "border-green-700" : "border-yellow-700"
+  const color = item?.final ? "item-final" : "item"
 
   return (
     <div className="mx-3 rounded-t-lg aspect-square grid" id={id}>
       <img src="/static/sprites/farm.png" alt="empty" className="w-full h-full row-end-1 col-end-1 row-start-1 col-start-1" />
       {item ? (
-        <div className={"rounded-xl border-8 border-solid w-full h-full aspect-square flex row-end-1 row-start-1 col-end-1 col-start-1 justify-center items-center" + color}>
-          <img src={item.image != "" ? item.image : '/static/sprites/' + item.name + '.png'} alt={item.name} className="p-2 w-full pixelated" />
+        <div className={"rounded-xl w-full h-full aspect-square flex row-end-1 row-start-1 col-end-1 col-start-1 justify-center items-center " + color}>
+          <img src={item.image != "" ? item.image : '/static/sprites/' + item.name + '.png'} alt={item.name} className={"p-2 w-full pixelated " + color} />
         </div>
-      ) : <p className="text-lg row-end-1 col-end-1 row-start-1 col-start-1">{noneMsg[type]}</p>}
+      ) : <p className="text-lg row-end-1 col-end-1 row-start-1 col-start-1 place-self-center">{noneMsg[type]}</p>}
     </div>
   )
 }
 
 export function ItemHTML(item: Item) {
-  const color = item.final ? "border-green-700" : "border-yellow-700"
+  const color = item.final ? "item-final" : "item"
   return (
-    <div className={"rounded-xl border-8 border-solid w-full h-full aspect-square flex justify-center items-center z-10" + color}>
-      <img src={item.image != "" ? item.image : '/static/sprites/' + item.name + '.png'} alt={item.name} className="p-2 w-full pixelated" />
+    <div className="rounded-xl w-full h-full aspect-square z-10 ">
+      <img src={item.image != "" ? item.image : '/static/sprites/' + item.name + '.png'} alt={item.name} className={"p-2 w-full pixelated " + color} />
     </div>
   )
 }

@@ -16,3 +16,11 @@ img {
 .modal {
     max-height: calc(100vh - 4rem);
 }
+
+.item {
+    filter: drop-shadow(0px 0px 5px #ffffff);
+}
+
+.item-final {
+    filter: drop-shadow(0px 0px 5px #00ff00);
+}

@@ -28,7 +28,7 @@ export async function post(req: SessionRequest) {
       if (data.crafting.elapsed < data.crafting.item.time * TIME_MULTIPLIER)
         throw new Error('You have not finished crafting yet')
       data.inventory.push(data.crafting.item)
-      data.breeding = undefined
+      data.crafting = undefined
     }
 
     await setGameData(req, data)
