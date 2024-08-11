@@ -73,7 +73,7 @@ export const allItems: Item[] = [
     type: 'plant'
   },
   {
-    name: "potatoes",
+    name: "potato",
     image: "",
     requirements: [],
     time: 4,
@@ -153,7 +153,7 @@ export const allItems: Item[] = [
     type: 'plant'
   },
   {
-    name: "peanuts",
+    name: "peanut",
     image: "",
     requirements: [],
     time: 3,
@@ -193,7 +193,7 @@ export const allItems: Item[] = [
     type: 'plant'
   },
   {
-    name: "licorice_stick",
+    name: "licorice_sticks",
     image: "",
     requirements: ["licorice", "sugar"],
     time: 2,
