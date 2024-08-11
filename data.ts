@@ -364,7 +364,7 @@ export const allItems: Item[] = [
   {
     name: "chips",
     image: "",
-    requirements: ["potatoes"],
+    requirements: ["potato"],
     time: 3,
     final: true,
     type: 'craft'
@@ -420,7 +420,7 @@ export const allItems: Item[] = [
   {
     name: "horalka",
     image: "",
-    requirements: ["peanuts", "flour", "caramel"],
+    requirements: ["peanut", "flour", "caramel"],
     time: 0.5,
     final: true,
     type: 'craft'
@@ -428,7 +428,7 @@ export const allItems: Item[] = [
   {
     name: "peanut_butter",
     image: "",
-    requirements: ["peanuts", "butter"],
+    requirements: ["peanut", "butter"],
     time: 2,
     final: true,
     type: 'craft'
