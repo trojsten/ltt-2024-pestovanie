@@ -70,4 +70,4 @@ export async function setGameData(req: SessionRequest, data: GameData) {
 }
 
 
-export const TIME_MULTIPLIER = 1000 //* 60 * 60
+export const TIME_MULTIPLIER = 1000 * 60 * 60

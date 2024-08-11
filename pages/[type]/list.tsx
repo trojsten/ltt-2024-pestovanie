@@ -12,13 +12,13 @@ function recipeHTML(item: Item, data: GameData) {
     <div id={'item-' + item.name} className={"grid grid-cols-7 rounded-md bg-yellow-700 items-center p-2 w-full mb-2 item-slots " + (isAvailable ? "" : "opacity-30")}>
       {item.requirements.map((requirement) => {
         const requirementItem = allItems.find(e => e.name == requirement)
-        return <div className="w-24 h-24 ml-2">{ItemHTML(requirementItem!)}</div>
+        return <div className="w-24 h-24 ml-2">{ItemHTML(requirementItem!, false)}</div>
       })}
       <div className="w-24 h-24 flex flex-col shrink items-center justify-center text-3xl col-start-6">
         <span className="text-sm">{item.time}h</span>
         <span>→</span>
       </div>
-      <div className="w-24 h-24 col-start-7">{ItemHTML(item)}</div>
+      <div className="w-24 h-24 col-start-7">{ItemHTML(item, false)}</div>
     </div>
   )
 }
@@ -49,5 +49,5 @@ async function items(req: SessionRequest) {
 
 export async function get(req: SessionRequest) {
   console.log('list')
-  return renderPage(await items(req), false, 404)
+  return renderPage(await items(req), false)
 }

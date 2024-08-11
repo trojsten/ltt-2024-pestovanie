@@ -87,11 +87,12 @@ function itemDisplay(item: Item | undefined, type: 'animal' | 'plant' | 'craft')
   )
 }
 
-export function ItemHTML(item: Item) {
+export function ItemHTML(item: Item, showTime = true) {
   const color = item.final ? "item-final" : "item"
   return (
-    <div className="rounded-xl w-full h-full aspect-square z-10 ">
+    <div className="rounded-xl w-full h-full aspect-square z-10 relative">
       <img src={item.image != "" ? item.image : '/static/sprites/' + item.name + '.png'} alt={item.name} className={"p-2 w-full pixelated " + color} />
+      {showTime ? <span className="absolute bottom-2 right-2 bg-yellow-800 text-gray-200 p-1 rounded text-xs">{item.time}h</span> : null}
     </div>
   )
 }
@@ -99,7 +100,4 @@ export function ItemHTML(item: Item) {
 export async function get(req: SessionRequest) {
   const data = await getGameData(req)
   return renderPage(mainPage(data))
-}
-
-export async function post(req: SessionRequest) {
 }

@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const waterBtn = document.getElementById("water-btn")
   const feedBtn = document.getElementById("feed-btn")
   const makeBtn = document.getElementById('make-btn')
+  let gameData = null
 
   closeBtn.addEventListener("click", () => {
     modal.style.opacity = "0";
@@ -74,9 +75,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   craftBtn.addEventListener("click", async () => {
+    if (gameData?.crafting != undefined)
+      return
     openModal("/craft/list", "Vyber si recept na výrobu")
     await wait(100)
     const recipeList = document.querySelectorAll(".item-slots")
+    console.log(recipeList)
     recipeList.forEach(recipe => {
       recipe.addEventListener("click", async (e) => {
         const id = recipe.id.split("-")[1]
@@ -107,7 +111,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 0);
   }
 
-  const TIME_MULTIPLIER = 1000 // * 60 * 60
+  const TIME_MULTIPLIER = 1000 * 60 * 60
 
   function isGrowing(growData) {
     if (growData.item.type == 'craft') {
@@ -191,12 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   async function updateLoop() {
     const res = await fetch('/update')
-    const gameData = await res.json()
+    gameData = await res.json()
     updateTimer(waterBtn, gameData, 'plant')
     updateTimer(feedBtn, gameData, 'animal')
     updateTimer(makeBtn, gameData, 'craft')
   }
 
-  const interval = window.setInterval(updateLoop, 1000)
+  window.setInterval(updateLoop, 1000)
   updateLoop()
 })

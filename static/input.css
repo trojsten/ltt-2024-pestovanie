@@ -18,9 +18,9 @@ img {
 }
 
 .item {
-    filter: drop-shadow(0px 0px 5px #ffffff);
+    /* filter: drop-shadow(0px 0px 2px #ffffff); */
 }
 
 .item-final {
-    filter: drop-shadow(0px 0px 5px #00ff00);
+    filter: drop-shadow(0px 0px 5px #ffa200);
 }

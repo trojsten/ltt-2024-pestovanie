@@ -10,7 +10,7 @@ function items(data: GameData) {
     <ul className="flex flex-wrap justify-around overflow-y-auto items-center">
       {data.inventory.map((item) => (
         <li className="h-24 w-24">
-          {ItemHTML(item)}
+          {ItemHTML(item, false)}
         </li>
       ))}
       {data.inventory.length == 0 ? <p className="my-3 text-red-500">Tvoj inventár je prázdny</p> : null}

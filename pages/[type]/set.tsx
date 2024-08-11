@@ -13,6 +13,8 @@ export async function post(req: SessionRequest) {
   let item = allItems.find((e) => e.name == itemName)
   if (!item || item!.type != type) return new Response(JSON.stringify({ msg: 'wrong type' }))
   if (type == "craft" && item?.requirements.every((e) => data.inventory.find(f => f.name == e) != undefined)) {
+    if (data.crafting != undefined)
+      return new Response(JSON.stringify({ msg: 'already crafting' }))
     data.crafting = {
       item: item,
       elapsed: 0,
