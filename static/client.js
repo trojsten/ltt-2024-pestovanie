@@ -154,7 +154,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const minutes = Math.floor(remaining / (60 * 1000));
     remaining %= 60 * 1000;
     const seconds = Math.floor(remaining / 1000);
-    return `${hours !== 0 ? hours.toString() + "h " : ""}${minutes !== 0 ? minutes.toString() + "m " : ""}${seconds !== 0 ? seconds : "0"} s`;
+    return `${hours !== 0 ? hours.toString() + "h " : ""}${minutes !== 0 ? minutes.toString() + "m " : ""}${seconds !== 0 ? seconds : "0"}s`;
   }
 
   function updateTimer(button, data, type) {
